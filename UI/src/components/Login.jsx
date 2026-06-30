@@ -85,7 +85,7 @@ export default function Login({ setToken, setCurrentUser, navigateTo }) {
 
       <div id="login-footer" className="mt-6 pt-6 border-t border-gray-100 text-center">
         <p className="text-sm text-gray-600">
-          New to the workspace?{' '}
+          New to the ReedHub?{' '}
           <button 
             id="btn-switch-to-register"
             className="text-indigo-600 hover:underline font-medium"
