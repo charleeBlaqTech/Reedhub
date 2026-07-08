@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "id": "usr_1783511554113",
+      "friends": [],
+      "createdAt": "2026-07-08T11:52:34.113Z",
+      "name": "Charles Arunegbode Daudu",
+      "email": "charlee@gmail.com",
+      "password": "$2b$10$6iAdiKW4jdDL9V63hGBZAOpcxEy7G1voGWx4uVhIykHvDB3BmTkui",
+      "bio": "Hello, I am practicing QA testing!",
+      "avatar": ""
+    }
+  ],
+  "posts": [],
+  "comments": [],
+  "messages": [],
+  "logs": [
+    {
+      "id": "log_1783514626813",
+      "userId": "usr_1783511554113",
+      "action": "SYSTEM_BROADCAST",
+      "details": "checks",
+      "timestamp": "2026-07-08T12:43:46.814Z"
+    }
+  ]
+}

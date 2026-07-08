@@ -3,6 +3,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Feed from './components/Feed';
 import Profile from './components/Profile';
+import Chat from './components/Chat';  
+import Admin from './components/Admin';
 
 export default function App() {
   // Global states for token management and active view tracking
@@ -10,6 +12,7 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('qa_user')) || null);
   const [currentView, setCurrentView] = useState(token ? 'feed' : 'login');
   const [viewingProfileId, setViewingProfileId] = useState(null);
+  const [activeChatPeerId, setActiveChatPeerId] = useState(null);
 
   // Synchronize authentication tokens to local storage elements
   useEffect(() => {
@@ -28,14 +31,17 @@ export default function App() {
     setCurrentUser(null);
     setCurrentView('login');
     setViewingProfileId(null);
+    setActiveChatPeerId(null);
   };
 
   // Dedicated navigation utility to route across component dashboards
   const navigateTo = (view, profileId = null) => {
     setCurrentView(view);
-    if (profileId) {
-      setViewingProfileId(profileId);
-    }
+    // if (profileId) {
+    //   setViewingProfileId(profileId);
+    // }
+    if (view === 'profile') setViewingProfileId(profileId);
+    if (view === 'chat') setActiveChatPeerId(profileId);
   };
 
   return (
@@ -70,6 +76,14 @@ export default function App() {
                 My Profile
               </button>
               <button 
+                id="nav-btn-admin-panel"
+                className={`text-sm font-semibold ${currentView === 'admin' ? 'text-amber-600' : 'text-gray-600 hover:text-gray-900'}`}
+                data-testid="link-admin-panel"
+                onClick={() => navigateTo('admin')}
+              >
+                Admin Terminal
+              </button>
+              <button 
                 id="nav-btn-logout"
                 className="text-sm font-medium text-red-600 hover:text-red-700 bg-red-50 px-3 py-1.5 rounded-md transition"
                 data-testid="btn-logout"
@@ -95,6 +109,11 @@ export default function App() {
         )}
         {currentView === 'profile' && (
           <Profile token={token} currentUser={currentUser} viewingProfileId={viewingProfileId} setCurrentUser={setCurrentUser} navigateTo={navigateTo} />
+        )}
+        {currentView === 'chat' && (<Chat token={token} currentUser={currentUser} activeChatPeerId={activeChatPeerId} />)}
+
+        {currentView === 'admin' && (
+          <Admin token={token} currentUser={currentUser} navigateTo={navigateTo} />
         )}
       </main>
     </div>

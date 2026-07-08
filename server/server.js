@@ -23,6 +23,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/auth', require('./routes/auth')); 
 app.use('/api/users', require('./routes/users'));
 app.use('/api/posts', require('./routes/posts'));
+app.use('/api/chat', require('./routes/chat'));  
+app.use('/api/admin', require('./routes/admin')); 
 
 
 // Simple baseline health-check endpoint route

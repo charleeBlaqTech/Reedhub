@@ -184,9 +184,19 @@ export default function Feed({ token, currentUser, navigateTo }) {
                       >
                         {post.authorName}
                       </h4>
+                      {post.authorId !== currentUser?.id && (
+                      <button
+                        onClick={() => navigateTo('chat', post.authorId)}
+                        className="text-[10px] ml-3 text-indigo-600 bg-indigo-50 font-bold px-2 py-0.5 rounded-md hover:bg-indigo-100 transition"
+                        data-testid={`btn-initiate-chat-${post.id}`}
+                      >
+                        💬 Chat Direct
+                      </button>
+                      )}
                       <p className="text-xs text-gray-400">{new Date(post.createdAt).toLocaleString()}</p>
                     </div>
                   </div>
+                  
                 </div>
 
                 {/* Post Body Content text and attachment fields */}

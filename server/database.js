@@ -9,7 +9,9 @@ const DB_FILE = path.join(__dirname, 'mock_db.json');
 const initialSchema = {
   users: [],
   posts: [],
-  comments: []
+  comments: [],
+  messages: [], // Real-world chat storage structure
+  logs: []      // Security audit trails for API testing assertions
 };
 
 /**
@@ -127,6 +129,38 @@ const db = {
     data.comments.push(newComment);
     writeDB(data);
     return newComment;
+  },
+
+  // --- NEW CHAT SYSTEM OPERATIONS ---
+  getMessages: () => readDB().messages,
+
+  createMessage: (msgObj) => {
+    const data = readDB();
+    const newMsg = {
+      id: `msg_${Date.now()}`,
+      timestamp: new Date().toISOString(),
+      ...msgObj
+    };
+    data.messages.push(newMsg);
+    writeDB(data);
+    return newMsg;
+  },
+
+  // --- NEW SECURITY AUDIT TRAIL SYSTEM ---
+  getLogs: () => readDB().logs,
+  
+  logAction: (userId, action, details) => {
+    const data = readDB();
+    const newLog = {
+      id: `log_${Date.now()}`,
+      userId,
+      action,
+      details,
+      timestamp: new Date().toISOString()
+    };
+    data.logs.push(newLog);
+    writeDB(data);
+    return newLog;
   }
 };
 
