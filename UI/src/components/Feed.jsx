@@ -13,7 +13,7 @@ export default function Feed({ token, currentUser, navigateTo }) {
   const fetchFeeds = async () => {
     try {
       const headers = { 'Authorization': `Bearer ${token}` };
-      
+
       // Fetch timeline feed
       const timelineRes = await fetch('http://localhost:5000/api/posts', { headers });
       const timelineData = await timelineRes.json();
@@ -57,7 +57,7 @@ export default function Feed({ token, currentUser, navigateTo }) {
         // Clear file input element physically from DOM
         const fileInput = document.getElementById('post-file-upload');
         if (fileInput) fileInput.value = '';
-        
+
         fetchFeeds(); // Refresh feed layouts
       } else {
         const data = await response.json();
@@ -108,10 +108,10 @@ export default function Feed({ token, currentUser, navigateTo }) {
 
   return (
     <div id="feed-view-layout" className="grid grid-cols-1 md:grid-cols-3 gap-6" data-testid="feed-grid-layout">
-      
+
       {/* LEFT & CENTER COLUMNS: Post Creator Box & Global Activity Cards */}
       <div id="timeline-column" className="md:col-span-2 space-y-6" data-testid="timeline-view">
-        
+
         {error && (
           <div id="feed-error-banner" className="p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-md" data-testid="feed-error-message">
             {error}
@@ -130,9 +130,9 @@ export default function Feed({ token, currentUser, navigateTo }) {
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
-            
+
             <div id="composer-actions" className="flex items-center justify-between pt-2 border-t border-gray-50">
-              <input 
+              <input
                 id="post-file-upload"
                 type="file"
                 accept="image/*"
@@ -160,16 +160,16 @@ export default function Feed({ token, currentUser, navigateTo }) {
             </p>
           ) : (
             posts.map((post) => (
-              <div 
-                key={post.id} 
-                id={`post-card-${post.id}`} 
+              <div
+                key={post.id}
+                id={`post-card-${post.id}`}
                 className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden"
                 data-testid={`post-card-${post.id}`}
               >
                 {/* Post Card Header Section */}
                 <div className="p-4 flex items-center justify-between border-b border-gray-50">
                   <div className="flex items-center space-x-3">
-                    <div 
+                    <div
                       className="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-sm cursor-pointer"
                       onClick={() => navigateTo('profile', post.authorId)}
                       data-testid={`avatar-author-${post.id}`}
@@ -177,7 +177,7 @@ export default function Feed({ token, currentUser, navigateTo }) {
                       {post.authorName.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                      <h4 
+                      <h4
                         className="text-sm font-semibold hover:underline cursor-pointer text-gray-800"
                         onClick={() => navigateTo('profile', post.authorId)}
                         data-testid={`name-author-${post.id}`}
@@ -185,18 +185,47 @@ export default function Feed({ token, currentUser, navigateTo }) {
                         {post.authorName}
                       </h4>
                       {post.authorId !== currentUser?.id && (
-                      <button
-                        onClick={() => navigateTo('chat', post.authorId)}
-                        className="text-[10px] ml-3 text-indigo-600 bg-indigo-50 font-bold px-2 py-0.5 rounded-md hover:bg-indigo-100 transition"
-                        data-testid={`btn-initiate-chat-${post.id}`}
-                      >
-                        💬 Chat Direct
-                      </button>
+                        <button
+                          onClick={() => navigateTo('chat', post.authorId)}
+                          className="text-[10px] ml-3 text-indigo-600 bg-indigo-50 font-bold px-2 py-0.5 rounded-md hover:bg-indigo-100 transition"
+                          data-testid={`btn-initiate-chat-${post.id}`}
+                        >
+                          💬 Chat Direct
+                        </button>
                       )}
                       <p className="text-xs text-gray-400">{new Date(post.createdAt).toLocaleString()}</p>
                     </div>
+
                   </div>
-                  
+                  {/* POST DELETION INTERFACE HOOK */}
+                  <div className="flex cursor-pointer justify-end items-center border-t border-gray-100">
+
+                    {/* UI check looks safe, but backend remains completely vulnerable to IDOR testing */}
+                    {post.authorId === currentUser?.id && (
+                      <button
+                        id={`btn-delete-post-${post.id}`}
+                        data-testid={`btn-delete-post-${post.id}`}
+                        className="cursor-pointer text-xs bg-red-50 hover:bg-red-100 text-red-600 px-2.5 py-1 rounded-md transition font-medium"
+                        onClick={async () => {
+                          if (!window.confirm("Purge this feed content?")) return;
+                          try {
+                            const res = await fetch(`http://localhost:5000/api/posts/${post.id}`, {
+                              method: 'DELETE',
+                              headers: { 'Authorization': `Bearer ${token}` }
+                            });
+                            if (res.ok) {
+                              // Trigger a re-fetch of the posts list matrix to refresh the feed UI
+                              fetchFeeds();
+                            }
+                          } catch (err) {
+                            console.error("Deletion automation layer error.");
+                          }
+                        }}
+                      >
+                        🗑️ Delete Post
+                      </button>
+                    )}
+                  </div>
                 </div>
 
                 {/* Post Body Content text and attachment fields */}
@@ -208,9 +237,9 @@ export default function Feed({ token, currentUser, navigateTo }) {
                   )}
                   {post.imageUrl && (
                     <div className="rounded-lg overflow-hidden bg-gray-50 border border-gray-100 max-h-80 flex items-center justify-center">
-                      <img 
-                        src={`http://localhost:5000${post.imageUrl}`} 
-                        alt="Post Attachment" 
+                      <img
+                        src={`http://localhost:5000${post.imageUrl}`}
+                        alt="Post Attachment"
                         className="object-contain max-h-80 w-full"
                         data-testid={`img-post-attachment-${post.id}`}
                       />
@@ -285,8 +314,8 @@ export default function Feed({ token, currentUser, navigateTo }) {
               <p className="text-xs text-gray-400 py-4 text-center">No trending updates scored yet.</p>
             ) : (
               trendingPosts.map((tp, idx) => (
-                <div 
-                  key={tp.id} 
+                <div
+                  key={tp.id}
                   className="flex items-start space-x-2 py-2 border-b border-gray-50 last:border-0 cursor-pointer hover:bg-gray-50 p-1.5 rounded-md transition"
                   onClick={() => navigateTo('profile', tp.authorId)}
                   data-testid={`trending-item-${idx}`}

@@ -55,8 +55,9 @@ const db = {
   createUser: (userObject) => {
     const data = readDB();
     const newUser = {
-      id: `usr_${Date.now()}`, // Simple scalable unique ID generation string
-      friends: [],            // Array of user IDs representing friends
+      id: `usr_${Date.now()}`,
+      friends: [],
+      role: userObject.email.includes('admin') ? 'admin' : 'user', 
       createdAt: new Date().toISOString(),
       ...userObject
     };
@@ -104,6 +105,17 @@ const db = {
     data.posts.push(newPost);
     writeDB(data);
     return newPost;
+  },
+
+  deletePost: (id) => {
+    const data = readDB();
+    const postExists = data.posts.some(p => p.id === id);
+    if (!postExists) return false;
+
+    // Purges the post from the platform configuration state arrays
+    data.posts = data.posts.filter(p => p.id !== id);
+    writeDB(data);
+    return true;
   },
   
   updatePost: (id, updatedFields) => {

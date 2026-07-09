@@ -9,6 +9,16 @@
       "password": "$2b$10$6iAdiKW4jdDL9V63hGBZAOpcxEy7G1voGWx4uVhIykHvDB3BmTkui",
       "bio": "Hello, I am practicing QA testing!",
       "avatar": ""
+    },
+    {
+      "id": "usr_1783515894598",
+      "friends": [],
+      "createdAt": "2026-07-08T13:04:54.598Z",
+      "name": "Enuma Splendid",
+      "email": "charlee@gmail.com",
+      "password": "$2b$10$qvevGSDrdu68/RsSxEU4AuVZnh7jT7mr/Mz5qRD/UYd07jtpuJQx6",
+      "bio": "Hello, I am practicing QA testing!",
+      "avatar": ""
     }
   ],
   "posts": [],

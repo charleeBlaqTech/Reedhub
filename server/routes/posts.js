@@ -162,4 +162,31 @@ router.post('/:id/comment', auth, (req, res) => {
   }
 });
 
+
+/**
+ * @route   DELETE /api/posts/:id
+ * @desc    Permanently delete a timeline post module
+ * @bug     INTENTIONAL IDOR VULNERABILITY: This route checks if the post exists and deletes it,
+ *          but completely skips validating whether the requesting user (`req.user.userId`) 
+ *          is actually the author of the post! Any user with a valid token can pass an arbitrary 
+ *          post ID string and destroy another user's content.
+ */
+router.delete('/:id', auth, (req, res) => {
+  try {
+    const postId = req.params.id;
+    
+    const post = db.findPostById(postId);
+    if (!post) {
+      return res.status(404).json({ error: "Target post pointer not found in database memory." });
+    }
+
+    const deletionOutcome = db.deletePost(postId);
+    if (!deletionOutcome) {
+      return res.status(500).json({ error: "Failed to purge post content module." });
+    }
+    res.status(200).json({ message: "Post content module purged successfully." });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to process target deletion packet routine." });
+  }
+});
 module.exports = router;
