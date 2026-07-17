@@ -16,6 +16,10 @@ const router = express.Router();
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    if(!name || !email || !password){
+      res.status(400).json({ error: "Bad request." });
+    }
+    
 
     // --- INTENTIONAL BUG REGION ---
     // Standard robust code would have a check here like:

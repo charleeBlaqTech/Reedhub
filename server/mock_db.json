@@ -1,36 +1,37 @@
 {
   "users": [
     {
-      "id": "usr_1783511554113",
+      "id": "usr_1783869281099",
       "friends": [],
-      "createdAt": "2026-07-08T11:52:34.113Z",
-      "name": "Charles Arunegbode Daudu",
-      "email": "charlee@gmail.com",
-      "password": "$2b$10$6iAdiKW4jdDL9V63hGBZAOpcxEy7G1voGWx4uVhIykHvDB3BmTkui",
+      "role": "user",
+      "createdAt": "2026-07-12T15:14:41.099Z",
+      "name": "odinaka",
+      "email": "odinaka@gmail.com",
+      "password": "$2b$10$6JygMIlxe91Q0u3UYtE0zeLZYPNNUlOtf5RDeIapznmyZH5gsNyNO",
       "bio": "Hello, I am practicing QA testing!",
       "avatar": ""
     },
     {
-      "id": "usr_1783515894598",
+      "id": "usr_1783869926774",
       "friends": [],
-      "createdAt": "2026-07-08T13:04:54.598Z",
-      "name": "Enuma Splendid",
-      "email": "charlee@gmail.com",
-      "password": "$2b$10$qvevGSDrdu68/RsSxEU4AuVZnh7jT7mr/Mz5qRD/UYd07jtpuJQx6",
-      "bio": "Hello, I am practicing QA testing!",
-      "avatar": ""
+      "role": "user",
+      "createdAt": "2026-07-12T15:25:26.774Z",
+      "name": "ebube dike",
+      "email": "ebube@gmail.com",
+      "password": "$2b$10$0Ec7gGo7t0y3TJhWU8lg1O6wqMs9S8HD9gDIUJyDcmwsPCezeTjX6"
+    },
+    {
+      "id": "usr_1783870216653",
+      "friends": [],
+      "role": "user",
+      "createdAt": "2026-07-12T15:30:16.653Z",
+      "name": "akachi",
+      "email": "akachi@gmail.com",
+      "password": "$2b$10$DDbaT.5DtN8UoPF0TeDMXuCGkjE.ALbcTCpeFyM8WITdkG46iVQPu"
     }
   ],
   "posts": [],
   "comments": [],
   "messages": [],
-  "logs": [
-    {
-      "id": "log_1783514626813",
-      "userId": "usr_1783511554113",
-      "action": "SYSTEM_BROADCAST",
-      "details": "checks",
-      "timestamp": "2026-07-08T12:43:46.814Z"
-    }
-  ]
+  "logs": []
 }

@@ -24,6 +24,20 @@ router.get('/:id', auth, (req, res) => {
   }
 });
 
+
+router.get('/',auth, (req, res) => {
+  try {
+    const users = db.getUsers();
+    if (!users) {
+      return res.status(404).json({ error: "Users not found." });
+    }
+
+    // Strip password hash string prior to return shipment
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to extract profile records." });
+  }
+});
 /**
  * @route   PUT /api/users/:id
  * @desc    Update user profile data (name, bio, avatar)
