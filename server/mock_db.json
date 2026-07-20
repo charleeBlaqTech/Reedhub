@@ -28,9 +28,73 @@
       "name": "akachi",
       "email": "akachi@gmail.com",
       "password": "$2b$10$DDbaT.5DtN8UoPF0TeDMXuCGkjE.ALbcTCpeFyM8WITdkG46iVQPu"
+    },
+    {
+      "id": "usr_1784386555573",
+      "friends": [],
+      "role": "user",
+      "createdAt": "2026-07-18T14:55:55.573Z",
+      "name": "adebisi Jones",
+      "email": "jonesad@gmail.com",
+      "password": "$2b$10$d5IqNLq9fa8LkadjwjDnTu87N2htvt8vi18gchPsXpgM3gT7xvaA.",
+      "bio": "Hello, I am practicing QA testing!",
+      "avatar": ""
+    },
+    {
+      "id": "usr_1784388780715",
+      "friends": [],
+      "role": "user",
+      "createdAt": "2026-07-18T15:33:00.715Z",
+      "name": "adebisi Jones",
+      "email": "jonesad@gmail.com",
+      "password": "$2b$10$DWDfyEv55wlC7qzrOvEkDebQoCzIs.lBTHIU.RyKGqNgNWRw4Z7xm",
+      "bio": "Hello, I am practicing QA testing!",
+      "avatar": ""
+    },
+    {
+      "id": "usr_1784389602389",
+      "friends": [],
+      "role": "user",
+      "createdAt": "2026-07-18T15:46:42.389Z",
+      "name": "Daudu Charles",
+      "email": "charlee@gmail.com",
+      "password": "$2b$10$S3rzB4MtbSw04skGpOFWReB8YCmzguZBtw97LVWy2JHeK4odx5mA.",
+      "bio": "Hello, I am practicing QA testing!",
+      "avatar": ""
     }
   ],
-  "posts": [],
+  "posts": [
+    {
+      "id": "post_1784389682700",
+      "likes": [
+        "usr_1784389602389"
+      ],
+      "createdAt": "2026-07-18T15:48:02.700Z",
+      "authorId": "usr_1784389602389",
+      "authorName": "Daudu Charles",
+      "content": "ygefydgyegdyjjgeduyhjegdjgfehdghgfhgfgf",
+      "imageUrl": "",
+      "comments": [
+        {
+          "id": "cmt_1784389690326",
+          "authorId": "usr_1784389602389",
+          "authorName": "Daudu Charles",
+          "text": "fjkhjfjkhfbjfhjhfh",
+          "createdAt": "2026-07-18T15:48:10.326Z"
+        }
+      ]
+    },
+    {
+      "id": "post_1784389710598",
+      "likes": [],
+      "createdAt": "2026-07-18T15:48:30.598Z",
+      "authorId": "usr_1784389602389",
+      "authorName": "Daudu Charles",
+      "content": "fknfkrjhngkjrffhmngkjrgn",
+      "imageUrl": "/uploads/img_1784389710591_apollo.png",
+      "comments": []
+    }
+  ],
   "comments": [],
   "messages": [],
   "logs": []

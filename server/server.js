@@ -36,11 +36,6 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// --- ROUTE REGISTRATION HOOKS PLACEHOLDERS ---
-// We will separate these routers out in subsequent steps to keep files clean.
-// app.use('/api/auth', require('./routes/auth'));
-// app.use('/api/users', require('./routes/users'));
-// app.use('/api/posts', require('./routes/posts'));
 
 // Start listening for network operations
 app.listen(PORT, () => {
